@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+          <!-- Values will be set by build script, use processTemplates function. UpgradeGuid may never change -->
+            
+          <!-- Version uses Major.Minor.Build format -->
+          <Product
+            Id="@Product.ProductCode@"
+            Name="@Product.ProductName@"
+            Language="@Product.Language@"
+            Version="@Product.Version@"
+            Manufacturer="@Product.Publisher@"
+            UpgradeCode="@Product.UpgradeGuid@"
+            >
+            
+            <!-- Auto Increment Package Id for every release -->
+            <Package
+              Id="*"
+              InstallerVersion="500"
+              Compressed="yes"
+              Platform="@Product.Platform@"
+              Description="@Product.Description@"
+              Manufacturer="@Product.Publisher@"
+              InstallScope='perUser'
+              InstallPrivileges='limited'
+            />
+
+            <!-- Include user interface -->
+            @Product.UIRefs@
+
+            <!-- Add various WiXVariables -->
+            @Product.Variables@
+
+            <!-- WiX uses media for splitting up files if using CDs for publishing. We make just one. All files will be embedded in it. -->
+            <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+
+            <Directory Id="TARGETDIR" Name="SourceDir">
+              <Directory Id="TempFolder">
+                <Directory Id="INSTALLDIR" Name="@Product.ProductName@">
+                  @Product.Directories@
+                  @Product.Components@
+                </Directory>
+              </Directory>
+            </Directory>
+            
+            @Product.DirectoryRefs@
+
+            @Product.Features@
+        
+            @Product.MajorUpgrade@
+
+            @Product.Upgrade@
+
+            @Product.CustomActions@
+
+            <InstallExecuteSequence>
+              @Product.ActionSequences@
+            </InstallExecuteSequence>
+          </Product>
+        </Wix>

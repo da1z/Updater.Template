@@ -1,0 +1,12 @@
+source https://nuget.org/api/v2
+framework: net452
+
+nuget Updater.Tool
+
+group Build
+	source https://nuget.org/api/v2	
+	framework: net452
+
+	nuget FAKE
+	nuget Newtonsoft.Json	
+	nuget WiX

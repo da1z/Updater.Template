@@ -1,0 +1,12 @@
+FRAMEWORK: NET452
+NUGET
+  remote: https://www.nuget.org/api/v2
+    Updater.Tool (0.1.4)
+
+GROUP Build
+FRAMEWORK: NET452
+NUGET
+  remote: https://www.nuget.org/api/v2
+    FAKE (4.39)
+    Newtonsoft.Json (9.0.1)
+    WiX (3.10.3)
