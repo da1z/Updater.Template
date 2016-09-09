@@ -18,7 +18,7 @@ let repoRootUrl = "http://server/repo"
 let keepVersions = 2
 
 let appDir = @"%USERPROFILE%" @@ appName
-let versionUrl = appName + ".version.json"
+let versionUrl = appName + ".version.txt"
 let repoUrl = 
     let repoRootUri = Uri(if repoRootUrl.EndsWith("/") then repoRootUrl else repoRootUrl + "/") 
     Uri(repoRootUri, appName).AbsoluteUri
@@ -64,10 +64,12 @@ Target "Build" (fun _ ->
     !! "packages/Updater.Tool/tools/*.*" 
     |> FileHelper.CopyTo deployDir
 
-    [ "appDir", appDir
-      "repoUrl", repoUrl
-      "versionUrl", versionUrl
-      "keepVersions", string keepVersions ] 
+    let inline (<==) name value = (name, value :> obj)
+
+    [ "appDir" <== appDir
+      "repoUrl" <== repoUrl
+      "versionUrl" <== versionUrl
+      "keepVersions" <== keepVersions ] 
     |> dict |> toJson |> write (deployDir @@ "config.json")
 )
 

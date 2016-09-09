@@ -1,6 +1,6 @@
 # Updater.Tempate
 
-Updater.Tempate helps to generate `updater.msi` that unpacks and launches [Updater](https://github.com/domartynov/Updater) 
+Updater.Tempate helps to generate `.msi` that unpacks and launches [Updater](https://github.com/domartynov/Updater) 
 from a temp folder.
 
 ## How to Use
