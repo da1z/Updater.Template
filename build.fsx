@@ -66,7 +66,9 @@ Target "Build" (fun _ ->
 
     let inline (<==) name value = (name, value :> obj)
 
-    [ "appDir" <== appDir
+    [ "appUid" <== WixProductUpgradeGuid
+      "appName" <== appName
+      "appDir" <== appDir
       "repoUrl" <== repoUrl
       "versionUrl" <== versionUrl
       "keepVersions" <== keepVersions ] 
