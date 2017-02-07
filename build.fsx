@@ -14,7 +14,7 @@ open Newtonsoft.Json
 //
 let appName = "app1"
 let appTitle = "App 1"
-let repoRootUrl = "http://server/repo"
+let repoRootUrl = "C:\\Projects\\Updater.Template\\repo"
 let keepVersions = 2
 
 let appDir = @"%USERPROFILE%" @@ appName
@@ -101,8 +101,10 @@ Target "BuildWiXSetup" (fun _ ->
     |> FileHelper.CopyTo tempDir
 
     let MajorUpgrade = generateMajorUpgradeVersion (fun f ->
-            { f with Schedule = MajorUpgradeSchedule.AfterInstallExecute
-                     DowngradeErrorMessage = "A later version is already installed, exiting." })
+            { f with Schedule = MajorUpgradeSchedule.AfterInstallExecute                  
+                     DowngradeErrorMessage = "A later version is already installed, exiting."
+                     AllowDowngrades = YesOrNo.No                     
+                      })
 
     let launchUpdaterCustomAction = generateCustomAction (fun p ->
             { p with Id = "LaunchUpdater"

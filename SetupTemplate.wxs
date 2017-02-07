@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
         <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+         
           <!-- Values will be set by build script, use processTemplates function. UpgradeGuid may never change -->
             
           <!-- Version uses Major.Minor.Build format -->
@@ -12,6 +13,7 @@
             UpgradeCode="@Product.UpgradeGuid@"
             >
             
+                        
             <!-- Auto Increment Package Id for every release -->
             <Package
               Id="*"
@@ -23,6 +25,8 @@
               InstallScope='perUser'
               InstallPrivileges='limited'
             />
+            <Property Id="ALLUSERS" Secure="yes" Value="2" />
+            <Property Id="MSIINSTALLPERUSER" Secure="yes" Value="1" />
 
             <!-- Include user interface -->
             @Product.UIRefs@
@@ -34,12 +38,14 @@
             <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
             <Directory Id="TARGETDIR" Name="SourceDir">
-              <Directory Id="TempFolder">
-                <Directory Id="INSTALLDIR" Name="@Product.ProductName@">
-                  @Product.Directories@
-                  @Product.Components@
+              <Directory Id="ProgramFilesFolder">
+                <Directory Id="AppRootDirectory" Name="@Product.Publisher@">
+                  <Directory Id="INSTALLDIR" Name="@Product.ProductName@">
+                    @Product.Directories@
+                    @Product.Components@
+                  </Directory>
                 </Directory>
-              </Directory>
+              </Directory>              
             </Directory>
             
             @Product.DirectoryRefs@
