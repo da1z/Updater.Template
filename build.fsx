@@ -14,7 +14,7 @@ open Newtonsoft.Json
 //
 let appName = "app1"
 let appTitle = "App 1"
-let repoRootUrl = "C:\\Projects\\Updater.Template\\repo"
+let repoRootUrl = "http://server/repo"
 let keepVersions = 2
 
 let appDir = @"%USERPROFILE%" @@ appName
